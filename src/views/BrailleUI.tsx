@@ -132,7 +132,7 @@ const BrailleUI = ()=>{
         alignItems="stretch"
       >
         <Grid item xs={6} className='br-text-input'>
-          <TextInput className='br-text-input__content' onChange={(handleTextChanged)}/>
+          <TextInput  className='br-text-input__content' onChange={(handleTextChanged)}/>
         </Grid>
         <Grid item xs={6} className='br-braille-canvas'>
           <BrailleCanvas className='br-braille-canvas__content w-full ' dots={paths} />

@@ -16,9 +16,9 @@ const isSerial = 'serial' in navigator
 
 const connectSerial = async (baud:number)=>{
   try{
-    const port = await navigator.serial.requestPort({filters})
+    const port = await navigator.serial.requestPort()
     await port.open({ baudRate: baud })
-    return port
+    return port;
   } catch (err) {
     console.error('Opening serial failed')
     throw err
@@ -85,16 +85,18 @@ export const sendSerial = async (
                 else if (!res.endsWith('ok\n')) {
                   console.warn('serial not ending with ok EOL')
                   throw new Error(`WrongResponse: ${res}`)
-                  
+    
                 }
               }
               lineProgress += 1
               cb({state:'printing',progress:(lineProgress/gcode.length)*100})
             }
-          } finally {
-            console.debug('reader lock released')
-            reader.releaseLock()
-            await writer.close()
+          }catch(err){
+            console.log(err)
+          }finally {
+            console.debug('reader lock released');
+            // writer.releaseLock();
+            await writer.close();
             await writableStreamClosed
           }
         }
@@ -103,7 +105,7 @@ export const sendSerial = async (
         //await writableStreamClosed
         cb({state:'done',progress:100})
       } finally {
-        await port.close()
+        // await port.close()
       }
     }
   } catch (e) {

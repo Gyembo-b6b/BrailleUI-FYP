@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+// eslint-disable-next-line linebreak-style
 //@ts-ignore: : needs React
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react'

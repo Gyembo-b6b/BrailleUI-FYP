@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 //@ts-ignore: : needs React
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { ChangeEvent, useState } from 'react'
@@ -17,20 +18,12 @@ const TextInput = (props:ITextInputProps)=>{
   return(
     <TextField
       fullWidth
-      className={props.className}
       error={text.length === 0}
       helperText={text.length === 0?'Input is empty':''}
       label="Input"
       multiline
-      //size='medium'
-      rows={10}
       defaultValue=""
       onChange={handleTextChange}
-      inputProps={{
-        style: {
-          height: '100%',
-        },
-      }}
     />
   )
 }

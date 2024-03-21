@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -18,7 +19,7 @@ const connectSerial = async (baud:number)=>{
   try{
     const port = await navigator.serial.requestPort()
     await port.open({ baudRate: baud })
-    return port;
+    return port
   } catch (err) {
     console.error('Opening serial failed')
     throw err
@@ -94,9 +95,9 @@ export const sendSerial = async (
           }catch(err){
             console.log(err)
           }finally {
-            console.debug('reader lock released');
+            console.debug('reader lock released')
             // writer.releaseLock();
-            await writer.close();
+            await writer.close()
             await writableStreamClosed
           }
         }
@@ -105,7 +106,7 @@ export const sendSerial = async (
         //await writableStreamClosed
         cb({state:'done',progress:100})
       } finally {
-        // await port.close()
+        await port.close()
       }
     }
   } catch (e) {

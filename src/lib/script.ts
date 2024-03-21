@@ -1,7 +1,7 @@
+/* eslint-disable linebreak-style */
 // Heavily based on code from StephaneG
 // original code https://github.com/crocsg/BrailleRap 
 
-import * as paper from 'paper'
 import { IBrailleTable, brailleTableMap } from '../assets/language-tables/brailleTable'
 import { compairCharAgaistDevnagriNumber, getPrefixforSpecialcharacter } from './charUtils'
 import { IBrailleSettings } from '../common/ui-settings/UiSettings'
@@ -447,6 +447,8 @@ export function brailleToGCode(textToWrite:string,settings:IBrailleSettings) {
   }
 
   const sortedgcode = buildoptimizedgcode()
+  // added
+  gcodeResetPosition(0,0,0);
   return sortedgcode
 }
 

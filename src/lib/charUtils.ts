@@ -1,3 +1,7 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable indent */
+/* eslint-disable semi */
+/* eslint-disable linebreak-style */
 export const compairCharAgaistDevnagriNumber = (char:string):number | string => {
   switch(char){
   case '१':

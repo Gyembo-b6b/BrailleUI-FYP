@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 //@ts-ignore: : needs React
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useState } from 'react'
@@ -15,6 +16,7 @@ import UiFooter from '../common/ui-footer/UiFooter'
 import UiSettings, { IBrailleSettings } from '../common/ui-settings/UiSettings'
 import { brailleTableOptions } from '../assets/language-tables/brailleTable'
 import PrintState from '../common/print-state/PrintState'
+// eslint-disable-next-line linebreak-style
 
 let isPrinting = false
 
@@ -35,7 +37,7 @@ const BrailleUI = ()=>{
   const [text,setText] = useState('')
   const [showSettings,setShowSettings] = useState(false)
   const [gcode,setGcode] = useState('')
-  const [paths,setPaths] = useState([] as any[])
+  const [paths,setPaths] = useState([] as any[]) 
   const [printState,setPrintState] = useState(defualtSerialState)
   const [alert,setAlert] = useState({
     title: 'ERROR',
@@ -119,10 +121,9 @@ const BrailleUI = ()=>{
   const handleSettingsClicked = ()=>{
     setShowSettings(true)
   }
-  const handleDebugClicked = ()=>{
-  }
+
   return(
-    <div className='br-braille-ui'>
+    <div className=''>
       <UiHeader className='br-ui-header'/>
       <Grid 
         container 
@@ -131,11 +132,11 @@ const BrailleUI = ()=>{
         justifyContent="center"
         alignItems="stretch"
       >
-        <Grid item xs={6} className='br-text-input'>
-          <TextInput  className='br-text-input__content' onChange={(handleTextChanged)}/>
+        <Grid item xs={4} className='br-text-input' >
+          <TextInput  className='br-text-input__content'  onChange={(handleTextChanged)}/>
         </Grid>
-        <Grid item xs={6} className='br-braille-canvas'>
-          <BrailleCanvas className='br-braille-canvas__content w-full ' dots={paths} />
+        <Grid item xs={8} className='br-braille-canvas'>
+          <BrailleCanvas className='br-braille-canvas__content' dots={paths} />
         </Grid>
         <Grid item xs={12} className='br-braille-controls'>
           <Controls 
@@ -143,7 +144,6 @@ const BrailleUI = ()=>{
             className='br-braille-controls__content'
             onSendClicked={handleSendClicked} 
             onGenerateClicked={handleGenerateClicked} 
-            onDebugClicked={handleDebugClicked}
             onSettingsClicked={handleSettingsClicked}
           />
         </Grid>

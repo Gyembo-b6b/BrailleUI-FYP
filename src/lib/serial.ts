@@ -89,15 +89,14 @@ export const sendSerial = async (
           }catch(err){
             console.log(err)
           }finally {
-            console.debug('reader lock released')
-            // writer.releaseLock();
+            writer.releaseLock()
             await writer.close()
             await writableStreamClosed
           }
         }
-        //startupReader.releaseLock()
-        //await writer.close()
-        //await writableStreamClosed
+        startupReader.releaseLock()
+        await writer.close()
+        await writableStreamClosed
         cb({state:'done',progress:100})
       } finally {
         await port.close()
@@ -109,41 +108,35 @@ export const sendSerial = async (
   }
 }
 
-const pump = (
+const pump = async (
   reader:ReadableStreamDefaultReader<Uint8Array>, 
   chunks: Uint8Array[],
 ):Promise<Uint8Array[]>=>{
-  return reader.read()
-    .then(({ value, done }) => {
-      if (done  || !value) {
-        return chunks
-      }
-
-      chunks.push(value)
-      return pump(reader,chunks)
-    })
+  const { value, done } = await reader.read()
+  if (done || !value) {
+    return chunks
+  }
+  chunks.push(value)
+  return pump(reader, chunks)
 }
 
-const pumpString = (
+const pumpString = async (
   reader:ReadableStreamDefaultReader<Uint8Array>, 
   str: string,
   oneLine = false
 ):Promise<string>=>{
-  return reader.read()
-    .then(({ value, done }) => {
-      if (done  || !value) {
-        console.debug('DONE')
-        return str
-      }
-
-      str += ab2str(value)
-      if (oneLine && str.endsWith('\n')){
-        console.debug('EOL')
-        return str
-      }
-      console.debug(value)
-      return pumpString(reader,str,oneLine)
-    })
+  const { value, done } = await reader.read()
+  if (done || !value) {
+    console.debug('DONE')
+    return str
+  }
+  str += ab2str(value)
+  if (oneLine && str.endsWith('\n')) {
+    console.debug('EOL')
+    return str
+  }
+  console.debug(value)
+  return pumpString(reader, str, oneLine)
 }
 
 const readStreamString = async (

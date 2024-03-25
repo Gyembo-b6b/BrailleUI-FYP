@@ -1,4 +1,9 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable linebreak-style */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable linebreak-style */
 /* eslint-disable semi */
 /* eslint-disable linebreak-style */
 // Heavily based on code from StephaneG
@@ -108,9 +113,9 @@ const gcodePosition = function(X?:number, Y?:number, Z?:number) {
   return code
 }
 
-// const gcodeGoTo = function(X?:number, Y?:number, Z?:number) {
-//   return 'G0' + gcodePosition(X, Y, Z)
-// }
+const gcodeGoTo = function(X?:number, Y?:number, Z?:number) {
+  return 'G0' + gcodePosition(X, Y, Z)
+}
 
 const gcodeMoveTo = function(X?:number, Y?:number, Z?:number) {
   return 'G1' + gcodePosition(X, Y, Z)
@@ -386,7 +391,7 @@ export function brailleToGCode(textToWrite:string,settings:IBrailleSettings) {
     console.error(`Table ${settings.tableName} does not exist`)
     return
   }
-  const brailleTable:IBrailleTable = brailleTableMap.get(settings.tableName) as IBrailleTable
+  const brailleTable:IBrailleTable = brailleTableMap.get(settings.tableName) 
   braille.speed = settings.velocity
   braille.homeY = settings.homeY
   braille.ejectPaper = settings.ejectPaper
@@ -450,8 +455,7 @@ export function brailleToGCode(textToWrite:string,settings:IBrailleSettings) {
   }
 
   const sortedgcode = buildoptimizedgcode()
-  // added
-  gcodeResetPosition(0,0,0);
+  gcodeHome();
   return sortedgcode
 }
 

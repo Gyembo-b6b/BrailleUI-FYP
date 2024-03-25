@@ -6,12 +6,6 @@
 import { sleep } from './utils'
 
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-const filters = [
-  {
-    'usbProductId': 29987,
-    'usbVendorId': 6790
-  }
-]
 
 const isSerial = 'serial' in navigator
 

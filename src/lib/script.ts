@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable semi */
+/* eslint-disable linebreak-style */
 // Heavily based on code from StephaneG
 // original code https://github.com/crocsg/BrailleRap 
 
@@ -60,9 +62,9 @@ export interface IGCode {
 const GCODEdotposition:IPosition2D[] = []
 const GCODEsvgdotposition:IPosition2D[] = []
 
-const gcodeSetAbsolutePositioning = function() {
-  return 'G90;\r\n'
-}
+// const gcodeSetAbsolutePositioning = function() {
+//   return 'G90;\r\n'
+// }
 
 const gcodeMotorOff = function()
 {
@@ -106,9 +108,9 @@ const gcodePosition = function(X?:number, Y?:number, Z?:number) {
   return code
 }
 
-const gcodeGoTo = function(X?:number, Y?:number, Z?:number) {
-  return 'G0' + gcodePosition(X, Y, Z)
-}
+// const gcodeGoTo = function(X?:number, Y?:number, Z?:number) {
+//   return 'G0' + gcodePosition(X, Y, Z)
+// }
 
 const gcodeMoveTo = function(X?:number, Y?:number, Z?:number) {
   return 'G1' + gcodePosition(X, Y, Z)
@@ -140,7 +142,7 @@ const gcodePrintDotCached = function ()
 
   return gcodeprintdot ()
 }
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const gcodeGraphDotCached = function ()
 {
   if (xhead != null && yhead != null)
@@ -299,21 +301,21 @@ const textToIndices = (
   const latinToBrailleMap = new Map(Object.entries(_brailleTable.latinToBraille))
   const indiceArray:ICharIndices[] = []
   const is8dot = _brailleTable.type === '8dots'
-  const is12dot = _brailleTable.type === "12dots"
+  const is12dot = _brailleTable.type === '12dots'
   let isWritingNumber = false
   let isSpecialchar = false
   let currentX = _brailleSettings.marginWidth
   let currentY = _brailleSettings.marginHeight
   console.log(_text)
-  let indices:number[]|undefined = []
+  let indices:number[]|undefined|boolean = []
   for(let i = 0 ; i < _text.length ; i++) {
     try{
       if(getPrefixforSpecialcharacter(_text[i+1])){
-         console.log('is special character');
-         const specialCharacter = _text[i]+_text[i+1]
-         indices = latinToBrailleMap.get(specialCharacter);
-         console.log(specialCharacter)
-         i=(i+1);
+        console.log('is special character');
+        const specialCharacter = _text[i]+_text[i+1]
+        indices = latinToBrailleMap.get(specialCharacter);
+        console.log(specialCharacter)
+        i=(i+1);
       }else{
         const char = _text[i]
         // check special cases:
@@ -360,6 +362,7 @@ const textToIndices = (
       console.log(err);
     }
     if (indices){
+      indices = indices as number[]
       indiceArray.push({
         xAct:currentX,
         yAct:currentY,
@@ -391,7 +394,7 @@ export function brailleToGCode(textToWrite:string,settings:IBrailleSettings) {
   GCODEdotposition.length = 0
 
   const is8dot = brailleTable.type === '8dots';
-  const is12dot = brailleTable.type === "12dots"
+  const is12dot = brailleTable.type === '12dots'
   const indicesArray = textToIndices(textToWrite,brailleTable,braille)
   for(let i = 0 ; i < indicesArray.length ; i++) {
     const indices = indicesArray[i]

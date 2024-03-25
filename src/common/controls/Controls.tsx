@@ -3,9 +3,7 @@
 //@ts-ignore: : needs React
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react'
-import { Button, Select } from '@mui/material'
-
-
+import { Button } from '@mui/material'
 
 export interface IControlsProps {
   className?:string
@@ -27,12 +25,6 @@ const Controls = (props:IControlsProps)=>{
 
   const handleSettings = ()=>{
     props.onSettingsClicked()
-  }
-
-  const handleDebug = ()=>{
-    if (props.onDebugClicked){
-      props.onDebugClicked()
-    }
   }
   return (
     <div className={`${props.className?props.className:''}`}>

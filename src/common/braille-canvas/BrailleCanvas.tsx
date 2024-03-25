@@ -34,12 +34,16 @@ const BrailleCanvas = (props: IBrailleCanvasProps) => {
 
   return (
     <Paper variant='outlined' style={{
-      paddingBottom:10
-    }} >
+      width: '100%',
+      height:'100%'
+    }}>
       <canvas
         id="braille-canvas"
         ref={canvasRef}
-        style={{ width: '100%', height: '100%' }}
+        style={{
+          width:'100%',
+          height: '100%'
+        }}
       />
     </Paper>
   )

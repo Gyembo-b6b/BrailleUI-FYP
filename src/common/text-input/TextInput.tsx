@@ -17,6 +17,7 @@ const TextInput = (props:ITextInputProps)=>{
   }
   return(
     <TextField
+      // maxRows={234}
       fullWidth
       error={text.length === 0}
       helperText={text.length === 0?'Input is empty':''}

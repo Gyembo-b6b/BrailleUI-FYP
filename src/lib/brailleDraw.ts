@@ -1,10 +1,11 @@
+/* eslint-disable linebreak-style */
 import { IPosition2D } from './script'
 
 export const gcodeParse = (gcode:string)=>{
   const dotArray:IPosition2D[] = []
   const gcodeSplit = gcode.split('\n')
   const moveRe = /G1\sX(\d+\.\d+)\sY(\d+\.\d+)/m
-  const dotRg = /M3\sS1/m
+  // const dotRg = /M3\sS1/m
   const cursor:IPosition2D = {
     x: 0,
     y: 0

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 //@ts-ignore: : needs React
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useEffect, useState } from 'react'
@@ -13,6 +14,7 @@ interface IUiHeader {
 
 const UiFooter = (props:IUiHeader)=>{
   return(
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     <div className={`${props.className} `}>
       <img
         //className='br-ui-footer__logo'
@@ -29,7 +31,7 @@ const UiFooter = (props:IUiHeader)=>{
         loading="lazy"
       />
       <img
-       className='br-ui-footer__logo'
+        className='br-ui-footer__logo'
         src={`${LogoCST}?w=50&h=50&fit=crop&auto=format`}
         srcSet={`${LogoCST}?w=50&h=50&fit=crop&auto=format&dpr=2 2x`}
         alt='logo cst'

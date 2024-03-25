@@ -1,3 +1,6 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable linebreak-style */
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, FormControl, InputLabel, MenuItem, Select, FormControlLabel, FormLabel, Radio, RadioGroup, Switch, SelectChangeEvent } from '@mui/material'
 import { brailleTableOptions } from '../../assets/language-tables/brailleTable'
 import { ChangeEvent, ReactNode, useState } from 'react'
@@ -28,7 +31,7 @@ const UiSettings = (props:IUiSettings)=>{
   const handleClose = ()=>{
     props.handleClose(state)
   }
-  const handleBrailleTableChanged = (event: SelectChangeEvent<''>, child: ReactNode)=>{
+  const handleBrailleTableChanged = (event: SelectChangeEvent<''>, _child: ReactNode)=>{
     setState({
       ...state,
       tableName: event.target.value

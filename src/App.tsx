@@ -1,6 +1,5 @@
 /* eslint-disable linebreak-style */
 //@ts-ignore: : needs React
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react'
 import BrailleUI from './views/BrailleUI'
 import { createTheme, ThemeProvider } from '@mui/material'

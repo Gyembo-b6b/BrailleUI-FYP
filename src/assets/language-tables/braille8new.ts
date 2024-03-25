@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // TODO: find the real table
 
 import { IBrailleTable } from './brailleTable'

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // 6 dots braille parameters
 
 import { IBrailleTable } from './brailleTable'

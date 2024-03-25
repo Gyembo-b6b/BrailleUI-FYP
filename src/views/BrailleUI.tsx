@@ -1,6 +1,5 @@
 /* eslint-disable linebreak-style */
 //@ts-ignore: : needs React
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useState } from 'react'
 import TextInput from '../common/text-input/TextInput'
 import Controls from '../common/controls/Controls'

@@ -1,5 +1,4 @@
 /* eslint-disable linebreak-style */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable linebreak-style */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -18,7 +17,7 @@ const braille = {
   marginWidth: 2,
   marginHeight: 3,
   paperWidth: 175,
-  paperHeight: 400,
+  paperHeight: 290,
   letterWidth: 1.5,
   dotRadius: 0.1,
   letterPadding: 2,

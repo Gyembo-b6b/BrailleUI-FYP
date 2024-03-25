@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { braille6 } from './braille6'
 import { braille6dzongkha } from './braille6dzongkha'
 import { braille8new } from './braille8new'

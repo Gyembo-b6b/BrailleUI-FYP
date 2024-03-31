@@ -19,7 +19,7 @@ const braille = {
   paperHeight:290,
   letterWidth: 1.5,
   dotRadius: 0.1,
-  letterPadding: 3.5,
+  letterPadding: 1.5,
   linePadding: 1,
   headDownPosition: -2.0,
   headUpPosition: 10,

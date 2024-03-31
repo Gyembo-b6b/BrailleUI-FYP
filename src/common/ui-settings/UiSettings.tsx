@@ -10,7 +10,9 @@ export interface IBrailleSettings {
   tableName: string,
   homeY: boolean,
   ejectPaper: boolean
-  velocity: number
+  velocity: number,
+  paperWidth:number,
+  paperHeight:number
 }
 
 interface IUiSettings {

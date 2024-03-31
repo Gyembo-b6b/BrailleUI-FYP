@@ -36,6 +36,7 @@ const BrailleUI = ()=>{
   const [text,setText] = useState('')
   const [showSettings,setShowSettings] = useState(false)
   const [gcode,setGcode] = useState('')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [paths,setPaths] = useState([] as any[]) 
   const [printState,setPrintState] = useState(defualtSerialState)
   const [alert,setAlert] = useState({

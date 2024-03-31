@@ -14,7 +14,6 @@ interface IUiHeader {
 
 const UiFooter = (props:IUiHeader)=>{
   return(
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     <div className={`${props.className} `}>
       <img
         //className='br-ui-footer__logo'

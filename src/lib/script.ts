@@ -1,26 +1,25 @@
 /* eslint-disable linebreak-style */
-/* eslint-disable linebreak-style */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable linebreak-style */
 /* eslint-disable semi */
-/* eslint-disable linebreak-style */
 // Heavily based on code from StephaneG
 // original code https://github.com/crocsg/BrailleRap 
 
 import { IBrailleTable, brailleTableMap } from '../assets/language-tables/brailleTable'
 import { compairCharAgaistDevnagriNumber, getPrefixforSpecialcharacter } from './charUtils'
 import { IBrailleSettings } from '../common/ui-settings/UiSettings'
+import { PaperSize } from '../utils/papersize'
 
 
 const braille = {
   marginWidth: 2,
   marginHeight: 3,
-  paperWidth: 175,
-  paperHeight: 290,
+  paperWidth: 300,
+  paperHeight:290,
   letterWidth: 1.5,
   dotRadius: 0.1,
-  letterPadding: 2,
+  letterPadding: 3.5,
   linePadding: 1,
   headDownPosition: -2.0,
   headUpPosition: 10,
@@ -43,7 +42,6 @@ const braille = {
   usedotgrid: false,
   homeY: true,
   ejectPaper: true,
-
 }
 
 let xhead = 0
@@ -355,7 +353,8 @@ const textToIndices = (
           _text = replaceAt(_text, i, _text[i].toLowerCase())
           i--
         }
-        if(!isSpecialchar && getPrefixforSpecialcharacter(char).length>0)
+        //@ts-ignore
+        if(!isSpecialchar && getPrefixforSpecialcharacter(char).length > 0)
         {
           indices = getPrefixforSpecialcharacter(char)      
           i--; 													// we will reread the same character
@@ -386,6 +385,12 @@ const textToIndices = (
 
 // Draw braille and generate gcode
 export function brailleToGCode(textToWrite:string,settings:IBrailleSettings) {
+  const papertype = localStorage.getItem('p-type')
+  const paperWidth = papertype === 'A4' ? PaperSize.A4.width : PaperSize.Braille.width
+  const paperHeight = papertype == 'A4' ? PaperSize.A4.height : PaperSize.Braille.height
+  braille.paperWidth = paperWidth
+  braille.paperHeight = paperHeight
+  braille.ejectPaper = true
   if (!brailleTableMap.has(settings.tableName)){
     console.error(`Table ${settings.tableName} does not exist`)
     return
@@ -427,34 +432,27 @@ export function brailleToGCode(textToWrite:string,settings:IBrailleSettings) {
         if(indices.indices.indexOf(brailleTable.dotMap[x][y]) != -1) { 			// if index exists in current char: draw the dot
           const px = currentX + x * braille.letterWidth
           const py = currentY + y * braille.letterWidth
-
           // Compute corresponding gcode position
           if(x > 0 || y > 0) {
-
             gx = braille.invertX ? - px : braille.paperWidth - px
             gy = -py						// canvas y axis goes downward, printers goes upward
-
             if(braille.delta) { 			// delta printers have their origin in the center of the sheet
               gx -= braille.paperWidth / 2
               gy += braille.paperHeight / 2
             } else if(!braille.invertY){
               gy += braille.paperHeight
             }
-
             gcodeMoveToCached(braille.mirrorX ? -gx : gx, braille.mirrorY ? -gy : gy,0)
             //GCODEdotposition.push ({x:(braille.mirrorX ? -gx : gx, y:braille.mirrorY ? -gy : gy)});
           }
-
           // print dot at position
           gcodePrintDotCached ()
-
         }
       }
     }
   }
-
   const sortedgcode = buildoptimizedgcode()
-  gcodeHome();
+  gcodeHome()
   return sortedgcode
 }
 

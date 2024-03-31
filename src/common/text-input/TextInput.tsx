@@ -1,6 +1,5 @@
 /* eslint-disable linebreak-style */
 //@ts-ignore: : needs React
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { ChangeEvent, useState } from 'react'
 import TextField from '@mui/material/TextField'
 

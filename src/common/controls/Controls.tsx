@@ -1,9 +1,10 @@
 /* eslint-disable linebreak-style */
 // eslint-disable-next-line linebreak-style
 //@ts-ignore: : needs React
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react'
-import { Button } from '@mui/material'
+import { Button, MenuItem, Select } from '@mui/material'
+import { useState } from 'react'
 
 export interface IControlsProps {
   className?:string
@@ -15,6 +16,14 @@ export interface IControlsProps {
 }
 
 const Controls = (props:IControlsProps)=>{
+  const [buttonVisible, setButtonVisible] = useState(false)
+  const handleStorageItem = (type:'A4'|'Braille') => {
+    localStorage.setItem('p-type',type)
+    console.log(localStorage.getItem('p-type'))
+  }
+  const toggleButtonPress = () => {
+    setButtonVisible(!buttonVisible)
+  }
   const handleSend = ()=>{
     props.onSendClicked()
   }
@@ -37,6 +46,19 @@ const Controls = (props:IControlsProps)=>{
       <Button variant='contained' onClick={handleSettings}>
         SETTINGS
       </Button>
+      <Button variant='contained' onClick={toggleButtonPress}>
+        Select Paper Type
+      </Button>
+      <Select open={buttonVisible}>
+        <MenuItem value="A4" onClick={()=>{
+          toggleButtonPress()
+          handleStorageItem('A4')
+        }}>A4 Paper</MenuItem>
+        <MenuItem value="Braille" onClick={()=>{
+          toggleButtonPress()
+          handleStorageItem('Braille')
+        }}>Braille Paper</MenuItem>
+      </Select>
       {/* <Button variant='contained' onClick={handleDebug}>
         DEBUG
       </Button> */}

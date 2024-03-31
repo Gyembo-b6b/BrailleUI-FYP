@@ -1,7 +1,5 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 import { sleep } from './utils'
 
@@ -80,7 +78,6 @@ export const sendSerial = async (
                 else if (!res.endsWith('ok\n')) {
                   console.warn('serial not ending with ok EOL')
                   throw new Error(`WrongResponse: ${res}`)
-    
                 }
               }
               lineProgress += 1
@@ -90,16 +87,14 @@ export const sendSerial = async (
             console.log(err)
           }finally {
             writer.releaseLock()
-            await writer.close()
-            await writableStreamClosed
+            startupReader.releaseLock()
+            reader.releaseLock()
+            // await writer.close()
           }
         }
-        startupReader.releaseLock()
-        await writer.close()
-        await writableStreamClosed
-        cb({state:'done',progress:100})
       } finally {
-        await port.close()
+        cb({state:'done',progress:100})
+        await port.forget()
       }
     }
   } catch (e) {

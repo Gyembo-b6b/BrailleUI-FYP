@@ -1,10 +1,10 @@
 export const PaperSize = {
   A4:{
-    width: 175,
+    width: 225,
     height: 290
   },
   Braille:{
-    width: 220,
+    width: 230,
     height: 290
   }
 }

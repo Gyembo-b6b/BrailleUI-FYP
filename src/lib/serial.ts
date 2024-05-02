@@ -46,15 +46,24 @@ export const sendSerial = async (
     if (port){
       try{
         cb({state:'connecting',progress:0})
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const writableStreamClosed = textEncoder.readable.pipeTo(port.writable as WritableStream<Uint8Array>)
+        console.log('0')
         const writer = textEncoder.writable.getWriter()
+        console.log('1')
         const startupReader = port.readable.getReader() as ReadableStreamDefaultReader<Uint8Array>
+        console.log('2')
         const printerInfo = await readStream(startupReader)
+        console.log(printerInfo)
         startupReader.releaseLock()
+        console.log('3')
         onPrinterInfo(printerInfo)
+        console.log('4')
         cb({state:'connected',progress:0})
+        console.log('5')
         console.debug(str2ab(printerInfo))
-        if (printerInfo.startsWith('start') || printerInfo === '\n'){
+        if (printerInfo.startsWith('start') || printerInfo === '\n' || printerInfo==''){
+          console.log('yes')
           await sleep(2000)
           const reader = port.readable.getReader() as ReadableStreamDefaultReader<Uint8Array>
           let lineProgress = 0
@@ -92,8 +101,10 @@ export const sendSerial = async (
             // await writer.close()
           }
         }
-      } finally {
-        cb({state:'done',progress:100})
+      }catch(err){
+        console.log(err)
+      }finally {
+        cb({state:'done',progress:0})
         await port.forget()
       }
     }
@@ -164,7 +175,7 @@ const readStream = async (
     reader.releaseLock()
   }, 2000)
   const chunks:Uint8Array[] = []
-  try {
+  try {                                 
     await pump(reader,chunks)
   } catch (error) {
     //

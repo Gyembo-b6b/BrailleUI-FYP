@@ -15,15 +15,15 @@ import { PaperSize } from '../utils/papersize'
 const braille = {
   marginWidth: 2,
   marginHeight: 3,
-  paperWidth: 300,
+  paperWidth: 210,
   paperHeight:290,
-  letterWidth: 1.5,
+  letterWidth:3,
   dotRadius: 0.1,
-  letterPadding: 1.5,
-  linePadding: 1,
+  letterPadding: 6,
+  linePadding:4,
   headDownPosition: -2.0,
   headUpPosition: 10,
-  speed: 2000,
+  speed: 2500,
   delta: false,
   goToZero: true,
   invertX: true,
@@ -76,11 +76,12 @@ const gcodeMotorOff = function()
 const gcodeHome = function ()
 {
   let str = 'G28 X;\r\n'
+  console.log('Executing gcodeHome');
   if (braille.homeY){
     str += 'G28 Y;\r\n'
+    console.log('Moving to Y home position');
   }
   
-
   return str
 }
 
@@ -306,6 +307,7 @@ const textToIndices = (
   const is12dot = _brailleTable.type === '12dots'
   let isWritingNumber = false
   let isSpecialchar = false
+  _brailleSettings.letterPadding = is12dot ? 9:3;
   let currentX = _brailleSettings.marginWidth
   let currentY = _brailleSettings.marginHeight
   console.log(_text)
@@ -321,7 +323,7 @@ const textToIndices = (
       }else{
         const char = _text[i]
         // check special cases:
-        const charIsCapitalLetter = is8dot ? false : is12dot ? false: /[A-Z]/.test(char)
+        const charIsCapitalLetter = is12dot ? false : is8dot ? /[A-Z]/.test(char):false
         const charIsLineBreak = /\r?\n|\r/.test(char)
     
         // If char is line break: reset currentX and increase currentY
@@ -348,7 +350,8 @@ const textToIndices = (
           isWritingNumber = true
         } else if(isWritingNumber && char == ' ') {
           isWritingNumber = false
-        } else if( charIsCapitalLetter ) { 							// if capital letter: add prefix, lowerCase letter and reread the same char
+        } else if( charIsCapitalLetter ) { 
+          console.log(charIsCapitalLetter)					// if capital letter: add prefix, lowerCase letter and reread the same char
           indices = [4, 6]
           _text = replaceAt(_text, i, _text[i].toLowerCase())
           i--

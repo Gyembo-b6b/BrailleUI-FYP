@@ -25,7 +25,9 @@ const defaultState: IBrailleSettings = {
   tableName: brailleTableOptions[0],
   homeY: true,
   ejectPaper: true,
-  velocity: 2000
+  velocity: 2000,
+  paperWidth: 0,
+  paperHeight: 0
 }
 
 const UiSettings = (props:IUiSettings)=>{

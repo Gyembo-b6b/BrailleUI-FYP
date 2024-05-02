@@ -14,13 +14,14 @@ const UiHeader = (props:IUiHeader)=>{
     <div className={props.className}>
       <img
         className='br-ui-header__logo'
-        src={`${BrailleI}?w=50&h=50&fit=crop&auto=format`}
+        src={`${BrailleI}?w=40&h=40&fit=crop&auto=format`}
         srcSet={`${BrailleI}?w=50&h=50&fit=crop&auto=format&dpr=2 2x`}
         alt='braille icon'
         loading="lazy"
       />
-      <Typography variant='h3'>
-      DUAL LANGUAGE BRAILLE TRANSLATOR<br/>
+      <Typography variant='h3' >
+      Dual Language Braille Translator<br/>
+        <span style={{ fontSize: '0.8em', letterSpacing: '-6px' }}>⠙⠥⠁⠇⠀⠇⠁⠝⠛⠥⠁⠛⠑⠀⠃⠗⠁⠊⠇⠇⠑⠀⠞⠗⠁⠝⠎⠇⠁⠞⠕⠗</span><br/>
       </Typography>
     </div>
   )

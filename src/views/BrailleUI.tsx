@@ -21,9 +21,11 @@ let isPrinting = false
 
 const defaultSettings: IBrailleSettings = {
   tableName: brailleTableOptions[0],
-  homeY: false,
-  ejectPaper: false,
-  velocity: 2000
+  homeY: true,
+  ejectPaper: true,
+  velocity: 2000,
+  paperWidth: 0,
+  paperHeight: 0
 }
 
 const defualtSerialState: ISerialState = {
@@ -80,7 +82,7 @@ const BrailleUI = ()=>{
       return
     }
     isPrinting = true
-    sendSerial(gcode.split('\n'),9600,handlePrinterInfo,(state:ISerialState)=>setPrintState(state))
+    sendSerial(gcode.split('\n'),115200,handlePrinterInfo,(state:ISerialState)=>setPrintState(state))
       .catch((err:Error)=>{
         const alertProps:IUiAlertProps = {
           title: 'ERROR',
